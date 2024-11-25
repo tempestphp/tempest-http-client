@@ -28,15 +28,17 @@ final class Psr18Driver implements ClientInterface, HttpClientDriver
 
     public function send(Request $request): Response
     {
-        $psrRequest = $this->convertTempestRequestToPsrRequest($request);
-
         return $this->convertPsrResponseToTempestResponse(
-            $this->sendRequest($psrRequest)
+            $this->sendRequest($request)
         );
     }
 
-    public function sendRequest(RequestInterface $request): ResponseInterface
+    public function sendRequest(Request|RequestInterface $request): ResponseInterface
     {
+        if ($request instanceof Request) {
+            $request = $this->convertTempestRequestToPsrRequest($request);
+        }
+
         return $this->client->sendRequest($request);
     }
 

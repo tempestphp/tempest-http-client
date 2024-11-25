@@ -15,6 +15,7 @@ use Tempest\HttpClient\HttpClient;
 
 /**
  * @internal
+ * @small
  */
 final class GenericHttpClientTest extends TestCase
 {
